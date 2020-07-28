@@ -60,14 +60,15 @@ def getNextGridState(gameGrid, prevGridState):
 
 def main():
 	# gameGrid = np.array(userStartGrid())
-	gameGrid = np.array(initGrid([[11,12], [12,11], [13,12], [12,13], [12,12]]))
+	currentGridState = np.array(initGrid([[11,12], [12,11], [13,12], [12,13], [12,12]]))
 	# gameGrid = np.array(initGrid([[1,2], [2,1], [3,2], [2,3], [2,2]]))
 	# prevGridState = np.array(initGrid([[1,2], [2,1], [3,2], [2,3], [2,2]]))
 	i = 0
 	while i < 8:
-		prevGridState = copy.deepcopy(gameGrid)
-		gameGrid = getNextGridState(gameGrid, prevGridState)
-		print(gameGrid)
+		prevGridState = copy.deepcopy(currentGridState)
+		nextGridState = getNextGridState(currentGridState, prevGridState)
+		print(f'previous - {prevGridState}')
+		print(f'current - {currentGridState}')
 		print('\n\n')
 		i += 1
 
