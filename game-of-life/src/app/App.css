@@ -22,19 +22,14 @@
 	max-width: 100%;
 	max-height: 100%;
 	display: grid;
-	grid: repeat(25, 45%) / auto-flow 2%;
+	grid: repeat(25, 40%) / auto-flow 1%;
 	background-color: #282c34;
 	color: white;
 	justify-content: center;
 	margin: 0 auto;
-	/* align-content: center; */
-	/* align-items: center; */
-	/* padding-left: 10%; */
-	/* padding-right: 10%; */
 	padding-bottom: 50%;
 	padding-top: 5%;
 	width: 80%;
-	/* height: auto; */
 }
 .grid-cell-dead {
 	border: 1px solid white;
@@ -46,11 +41,9 @@
 	background-color: pink;
 	text-align: center;
 }
-.grid-cell:hover {
-	background-color: white;
+.grid-cell-dead:hover {
+	background-color: pink;
 }
-.grid-cell:active {
-	background-color: white;
-}
-/* display: grid;
-grid: repeat(25, 5%) / auto-flow 5%; */
+/* .grid-cell-alive:hover {
+	background-color: black;
+} */
