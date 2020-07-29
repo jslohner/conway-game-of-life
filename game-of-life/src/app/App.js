@@ -1,12 +1,12 @@
 import React from 'react';
+import Header from './components/Header.js';
 import Grid from './components/Grid/Grid.js'
 import './App.css';
 
 function App() {
 	return (
 		<div className='app'>
-			<header className='header'>
-			</header>
+			<Header />
 			<Grid />
 		</div>
 	);
