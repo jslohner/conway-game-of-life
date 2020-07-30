@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function ControlCenter() {
+function ControlCenter({ gridCells }) {
 	function nextStep(e) {
 		e.preventDefault();
 	}
+
+	useEffect(() => {
+		console.log(gridCells);
+	}, []);
 
 	return (
 		<div className='control-center'>

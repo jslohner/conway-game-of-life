@@ -11,16 +11,25 @@ function Grid() {
 		}
 	}
 	useEffect(() => {
-		setGridCells(gridArr);
+		// setGridCells(gridArr);
+		// console.log(gridCells);
+		setGridCells(
+			...gridCells,
+			gridArr.map((coordinate, i) => {
+				return <Cell key={i} coordinate={coordinate}/>
+			})
+		);
 	}, []);
 
 	return (
 		<div className='game-control'>
-			<ControlCenter />
+			{gridCells.length > 0 && <ControlCenter gridCells={gridCells}/>}
 			<div className='grid'>
 				{
-					gridCells.map((coordinate, i) => {
-						return <Cell key={i} coordinate={coordinate}/>
+					gridCells.map((cell, i) => {
+						// console.log(coordinate);
+						// return <Cell key={i} coordinate={coordinate}/>
+						return cell;
 					})
 				}
 			</div>
