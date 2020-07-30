@@ -7,7 +7,7 @@ class Cell:
 
 	def __repr__(self):
 		# return f'isAlive - {self.isAlive} | isBlack - {self.isBlack} | clickable - {self.clickable}'
-		return f'{1 if self.isAlive else 0}'
+		return 'on' if self.isAlive else 'off'
 		# return f'{self.coordinate}'
 
 	def toggleAlive(self):
