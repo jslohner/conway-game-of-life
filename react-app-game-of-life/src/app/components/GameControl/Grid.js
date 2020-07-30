@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ControlCenter from './ControlCenter.js';
 import Cell from './Cell.js';
 
 function Grid() {
@@ -14,12 +15,15 @@ function Grid() {
 	}, []);
 
 	return (
-		<div className='grid'>
-			{
-				gridCells.map((coordinate, i) => {
-					return <Cell key={i} coordinate={coordinate}/>
-				})
-			}
+		<div className='game-control'>
+			<ControlCenter />
+			<div className='grid'>
+				{
+					gridCells.map((coordinate, i) => {
+						return <Cell key={i} coordinate={coordinate}/>
+					})
+				}
+			</div>
 		</div>
 	);
 }
