@@ -17,7 +17,7 @@ function Grid() {
 	// );
 	let [gridCells, setGridCells] = useState(
 		gridArr.map((coordinate, i) => {
-			return {'key': i, 'coordinate': coordinate, 'isAlive': false}
+			return {'key': i, 'coordinate': coordinate, 'isAlive': false};
 		})
 	);
 
@@ -29,16 +29,27 @@ function Grid() {
 		setGridCells(rtnGridCells);
 	}
 
-	// function nextStep(e) {
-	// 	e.preventDefault();
-	// }
+	function nextStep() {
+		// let aliveCoordinates = gridCells.filter((cell, i) => {
+		// 	if (cell.isAlive) {
+		// 		console.log(cell.coordinate);
+		// 		return cell.coordinate;
+		// 	}
+		// });
+		let aliveCoordinates = [];
+		gridCells.forEach((cell, i) => {
+			if (cell.isAlive) {
+				aliveCoordinates.push(cell.coordinate);
+			}
+		});
+	}
 
 	useEffect(() => {
 	}, []);
 
 	return (
 		<div className='game-control'>
-			{gridCells.length > 0 && <ControlCenter gridCells={gridCells}/>}
+			{gridCells.length > 0 && <ControlCenter nextStep={nextStep}/>}
 			<div className='grid'>
 				{/* {console.log(gridCells)} */}
 				{gridCells.map((cell, i) => {

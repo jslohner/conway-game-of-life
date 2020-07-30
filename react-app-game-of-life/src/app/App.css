@@ -18,14 +18,36 @@
 	font-size: calc(10px + 2vmin);
 	color: white;
 }
+
 .control-center {
 	color: white;
+	font-size: 2.5rem;
 	background-color: black;
 	border: 2px solid white;
 	justify-content: center;
 	margin: 0 auto;
 	width: 40%;
 }
+.next-step-button {
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 1.5rem;
+	border: 1px solid white;
+	border-radius: 0.25rem;
+	margin-bottom: 2%;
+}
+.next-step-button:hover {
+	background-color: white;
+	color: black;
+}
+.next-step-button:active {
+	background-color: red;
+}
+.next-step-button:focus {
+	outline-color: black;
+}
+
 .grid {
 	max-width: 100%;
 	max-height: 100%;
