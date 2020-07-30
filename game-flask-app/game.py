@@ -61,7 +61,7 @@ def getNextGridState(gameGrid, prevGridState):
 app = Flask(__name__)
 
 @app.route('/')
-def index():
+def main():
 	# gameGrid = np.array(userStartGrid())
 	currentGridState = np.array(initGrid([[11,12], [12,11], [13,12], [12,13], [12,12]]))
 	# gameGrid = np.array(initGrid([[1,2], [2,1], [3,2], [2,3], [2,2]]))
@@ -76,7 +76,7 @@ def index():
 		i += 1
 	return str(nextGridState)
 
-# index()
+# main()
 
 # If a cell is alive, and 2 or 3 of it's neighbours are also alive, the cell remains alive.
 # If a cell is alive and it has more than 3 alive neighbours, it dies of overcrowding.

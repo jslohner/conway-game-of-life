@@ -46,11 +46,11 @@
 }
 .grid-cell-alive {
 	border: 1px solid white;
-	background-color: pink;
+	background-color: red;
 	text-align: center;
 }
 .grid-cell-dead:hover {
-	background-color: pink;
+	background-color: red;
 }
 /* .grid-cell-alive:hover {
 	background-color: black;

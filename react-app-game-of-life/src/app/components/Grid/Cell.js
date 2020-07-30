@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Cell({ cellNum }) {
+function Cell({ coordinate }) {
 	let [isAlive, setIsAlive] = useState(false);
 	let cellState = isAlive ? 'alive' : 'dead'
 
