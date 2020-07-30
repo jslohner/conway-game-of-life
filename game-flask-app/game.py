@@ -1,6 +1,9 @@
 from flask import Flask
+app = Flask(__name__)
+
 from cell import Cell
 import numpy as np
+import ast
 import copy
 
 def initGrid(cellList):
@@ -23,11 +26,11 @@ def userStartGrid():
 	cellList = []
 	continueInput = True
 	while continueInput:
-		row, column = input('enter cell row and column (row,colum) - ').split(',')
+		# row, column = input('enter cell row and column (row,colum) - ').split(',')
 		# cellDict[int(column)] = int(row)
 		cellList.append([row, column])
-		cont = input('add another cell (type [y] to continue || type any other key to end) - ')
-		continueInput = False if (not cont == 'y') else True
+		# cont = input('add another cell (type [y] to continue || type any other key to end) - ')
+		# continueInput = False if (not cont == 'y') else True
 	return initGrid(cellList)
 
 
@@ -58,8 +61,6 @@ def getNextGridState(gameGrid, prevGridState):
 					gameGrid[cell.coordinate[0]][cell.coordinate[1]].toggleAlive()
 	return gameGrid
 
-app = Flask(__name__)
-
 @app.route('/')
 def main():
 	# gameGrid = np.array(userStartGrid())
@@ -77,6 +78,15 @@ def main():
 	return str(nextGridState)
 
 # main()
+
+@app.route('/nextstep/<cellList>')
+def oneStepForward(cellList):
+	cellList = ast.literal_eval(cellList)
+	currentGridState = np.array(initGrid(cellList))
+	# ---
+	prevGridState = copy.deepcopy(currentGridState)
+	nextGridState = getNextGridState(currentGridState, prevGridState)
+	return str(nextGridState)
 
 # If a cell is alive, and 2 or 3 of it's neighbours are also alive, the cell remains alive.
 # If a cell is alive and it has more than 3 alive neighbours, it dies of overcrowding.
