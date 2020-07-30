@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 
-function Cell({ coordinate }) {
+function Cell({ cellId, coordinate, cellStateChange }) {
 	let [isAlive, setIsAlive] = useState(false);
-	let cellState = isAlive ? 'alive' : 'dead'
+	let cellState = isAlive ? 'alive' : 'dead';
 
 	function toggleAlive() {
 		setIsAlive(!isAlive);
 	}
 
+	function handleChange(e) {
+		toggleAlive();
+		cellStateChange(e.target);
+	}
+
 	return (
-		<div className={`grid-cell-${cellState}`} onClick={toggleAlive}>
-		</div>
+		<div id={cellId} className={`grid-cell-${cellState}`} onClick={handleChange}></div>
 	);
 }
 
