@@ -326,10 +326,36 @@ function Grid() {
 	}
 
 	function gliderPreset() {
+		// console.log(currentGridState);
+		let nextAliveCoordinates = [[11,11], [12,12], [13,12], [12,13], [11,13]];
+		// setCurrentGridState([
+		// 	...currentGridState,
+		// 	currentGridState.map(cell => {
+		// 		nextAliveCoordinates.forEach(c => {
+		// 			if (currentGridState.indexOf(c) !== -1) {
+		// 				cell.isAlive = !cell.isAlive;
+		// 			}
+		// 		})
+		// 	})
+		// ])
 		setUpdate(true);
 		setNextRecursion([[11,11], [12,12], [13,12], [12,13], [11,13]]);
-		// currentGridState.forEach(cell => console.log(cell));
-		// setGrid(currentGridState);
+		// let nextAliveCoordinates = [[11,11], [12,12], [13,12], [12,13], [11,13]];
+		// tempGrid.forEach(cell => {
+		// 	nextAliveCoordinates.forEach(coordinate => {
+		// 		if ((cell.coordinate[0] === coordinate[0]) && (cell.coordinate[1] === coordinate[1])) {
+		// 			// toggleCellAlive(cell);
+		// 			cell.isAlive = !cell.isAlive;
+		// 			let rtnGridCells = [...tempGrid];
+		// 			let targetCellData = {...tempGrid[cell.key]};
+		// 			targetCellData.isAlive = !targetCellData.isAlive;
+		// 			rtnGridCells[cell.key] = targetCellData;
+		// 			setTempGrid([...rtnGridCells]);
+		// 		}
+		// 	});
+		// });
+		// setGrid(tempGrid);
+		// setTempGrid([...baseGrid]);
 	}
 
 	useEffect(() => {
