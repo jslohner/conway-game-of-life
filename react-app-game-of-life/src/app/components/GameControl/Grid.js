@@ -325,32 +325,12 @@ function Grid() {
 		setCurrentGridState([...grid]);
 	}
 
-	// function onFrame(timestamp) {
-	// 	if (continueAnimation) {
-	// 		requestAnimationFrame(onFrame);
-	// 	}
-	// 	let elapsed = prevTimeStamp - timestamp;
-	// 	setTimeStamp(timestamp);
-	// }
-	//
-	// function cancelAnimation() {
-	// 	setContinueAnimation(false);
-	// }
-	//
-	// useEffect(() => {
-	// 	if (!started) {
-	// 		setStarted(true);
-	// 		requestAnimationFrame(onFrame);
-	// 	}
-	// }, [started]);
-
-	// useEffect(() => {
-	// 	if (update) {
-	// 		setUpdate(false);
-	// 	} else {
-	// 		// setIsRunning(false);
-	// 	}
-	// }, [currentGridState]);
+	function gliderPreset() {
+		setUpdate(true);
+		setNextRecursion([[11,11], [12,12], [13,12], [12,13], [11,13]]);
+		// currentGridState.forEach(cell => console.log(cell));
+		// setGrid(currentGridState);
+	}
 
 	useEffect(() => {
 		if (update) {
@@ -362,7 +342,7 @@ function Grid() {
 
 	return (
 		<div className='game-control'>
-			{currentGridState.length > 0 && <ControlCenter isRunningRef={isRunningRef} getNextNSteps={getNextNSteps} startAnimation={startAnimation} stopAnimation={stopAnimation} nextStep={nextStep} clear={clear}/>}
+			{currentGridState.length > 0 && <ControlCenter isRunningRef={isRunningRef} getNextNSteps={getNextNSteps} startAnimation={startAnimation} stopAnimation={stopAnimation} nextStep={nextStep} clear={clear} gliderPreset={gliderPreset}/>}
 			<div className='grid'>
 				{/* {isRunning && current.map((cell, i) => {
 						return <Cell key={cell.key} cellId={cell.key} alive={cell.isAlive} currentCellStateChange={currentCellStateChange}/>

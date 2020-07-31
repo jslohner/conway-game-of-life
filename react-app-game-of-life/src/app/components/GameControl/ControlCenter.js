@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ControlCenter({ isRunningRef, getNextNSteps, startAnimation, stopAnimation, nextStep, clear }) {
+function ControlCenter({ isRunningRef, getNextNSteps, startAnimation, stopAnimation, nextStep, clear, gliderPreset }) {
 	let [isAnimating, setIsAnimating] = useState(false);
 
 	function handleStartAnimate(e) {
@@ -30,6 +30,11 @@ function ControlCenter({ isRunningRef, getNextNSteps, startAnimation, stopAnimat
 		clear();
 	}
 
+	function handleGliderPreset(e) {
+		e.preventDefault();
+		gliderPreset();
+	}
+
 	return (
 		<div className='control-center'>
 			<h2>Control Center</h2>
@@ -38,6 +43,9 @@ function ControlCenter({ isRunningRef, getNextNSteps, startAnimation, stopAnimat
 			<button className='next-step button' onClick={handleNextStepClick}>Next Step</button>
 			<button className='next-n-step button' onClick={handleNextNStepClick}>Next N Steps</button>
 			<button className='clear button' onClick={handleClear}>Clear</button>
+			<div>
+				<button className='glider button' onClick={handleGliderPreset}>Glider Preset</button>
+			</div>
 		</div>
 	);
 }
