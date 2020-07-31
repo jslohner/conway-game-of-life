@@ -102,10 +102,46 @@ def oneStepForward(cellList):
 	return rtnDict
 	# return str(nextGridState)
 
-# If a cell is alive, and 2 or 3 of it's neighbours are also alive, the cell remains alive.
-# If a cell is alive and it has more than 3 alive neighbours, it dies of overcrowding.
-# If a cell is alive and it has fewer than 2 alive neighbours, it dies of loneliness.
-# If a cell is dead and it has exactly 3 neighbours it becomes alive again.
-
-# gameGrid = np.array(initGrid([[11,12], [12,11], [13,12], [12,13], [12,12]]))
-# prevGridState = np.array(initGrid([[11,12], [12,11], [13,12], [12,13], [12,12]]))
+@app.route('/animate/<int:numrecursions>/<initialCellList>')
+def animate(numrecursions, initialCellList):
+	cellList = ast.literal_eval(initialCellList)
+	currentGridState = np.array(initGrid(cellList))
+	# ---
+	rtnDict = {}
+	for n in range(numrecursions):
+		prevGridState = copy.deepcopy(currentGridState)
+		nextGridState = getNextGridState(currentGridState, prevGridState)
+		nextGridStateList = nextGridState.tolist()
+		singleDict = {i:nextGridStateList[i] for i in range(len(nextGridStateList))}
+		for key in singleDict:
+			for i in range(len(singleDict[key])):
+				if singleDict[key][i].isAlive:
+					singleDict[key][i] = 1
+				else:
+					singleDict[key][i] = 0
+		rtnDict[f'Recursion - {n}'] = singleDict
+	# cont = True
+	# dict1 = {}
+	# dict2 = {}
+	# while cont:
+	# 	prevGridState = copy.deepcopy(currentGridState)
+	# 	nextGridState = getNextGridState(currentGridState, prevGridState)
+	# 	dict1 = {i:currentGridState[i] for i in range(len(currentGridState))}
+	# 	dict2 = {i:nextGridState[i] for i in range(len(nextGridState))}
+		# for key in dict1.keys():
+		# 	for i in range(len(dict1[key])):
+		# 		if dict1[key][i] != dict2[key][i]:
+		# 			cont = False
+	# for key in rtnDict1:
+	# 	for i in range(len(rtnDict[key])):
+	# 		if rtnDict[key][i].isAlive:
+	# 			rtnDict[key][i] = 1
+	# 		else:
+	# 			rtnDict[key][i] = 0
+	# for key in rtnDict2:
+	# 	for i in range(len(rtnDict[key])):
+	# 		if rtnDict[key][i].isAlive:
+	# 			rtnDict[key][i] = 1
+	# 		else:
+	# 			rtnDict[key][i] = 0
+	return rtnDict
