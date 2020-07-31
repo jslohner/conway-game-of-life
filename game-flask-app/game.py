@@ -1,5 +1,8 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
+CORS(app)
 
 from cell import Cell
 import numpy as np
@@ -86,7 +89,18 @@ def oneStepForward(cellList):
 	# ---
 	prevGridState = copy.deepcopy(currentGridState)
 	nextGridState = getNextGridState(currentGridState, prevGridState)
-	return str(nextGridState)
+	# ---
+	nextGridState = nextGridState.tolist()
+	rtnDict = {i:nextGridState[i] for i in range(len(nextGridState))}
+	for key in rtnDict:
+		for i in range(len(rtnDict[key])):
+			if rtnDict[key][i].isAlive:
+				rtnDict[key][i] = 1
+			else:
+				rtnDict[key][i] = 0
+	# print(rtnDict)
+	return rtnDict
+	# return str(nextGridState)
 
 # If a cell is alive, and 2 or 3 of it's neighbours are also alive, the cell remains alive.
 # If a cell is alive and it has more than 3 alive neighbours, it dies of overcrowding.

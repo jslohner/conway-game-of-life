@@ -17,9 +17,9 @@ function ControlCenter({ nextStep }) {
 	// 	});
 	// }
 
-	useEffect(() => {
-		// console.log(gridCells);
-	}, []);
+	// useEffect(() => {
+	// 	// console.log(gridCells);
+	// }, []);
 
 	return (
 		<div className='control-center'>

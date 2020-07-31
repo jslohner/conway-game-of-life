@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function Cell({ cellId, coordinate, cellStateChange }) {
-	let [isAlive, setIsAlive] = useState(false);
+function Cell({ cellId, alive, currentCellStateChange }) {
+	let [isAlive, setIsAlive] = useState(alive);
 	let cellState = isAlive ? 'alive' : 'dead';
 
 	function toggleAlive() {
@@ -10,7 +10,7 @@ function Cell({ cellId, coordinate, cellStateChange }) {
 
 	function handleChange(e) {
 		toggleAlive();
-		cellStateChange(e.target);
+		currentCellStateChange(e.target);
 	}
 
 	return (
