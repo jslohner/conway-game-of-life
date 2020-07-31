@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
+import Rules from '../Rules.js';
 import ControlCenter from './ControlCenter.js';
 import Cell from './Cell.js';
 
@@ -382,6 +383,7 @@ function Grid() {
 						return <Cell key={cell.key} cellId={cell.key} alive={false} currentCellStateChange={currentCellStateChange}/>
 					})} */}
 			</div>
+			<Rules />
 		</div>
 	);
 }
