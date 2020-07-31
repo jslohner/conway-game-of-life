@@ -12,32 +12,14 @@ for (let x = 0; x < 25; x++) {
 }
 
 function Grid() {
-	// let [currentGridState, setCurrentGridState] = useState(
-	// 	gridArr.map((coordinate, i) => {
-	// 		return <Cell key={i} cellId={i} coordinate={coordinate} currentCellStateChange={currentCellStateChange}/>
-	// 	})
-	// );
-	let baseGrid = gridArr.map((coordinate, i) => {
-		return initCell(i, coordinate);
-	});
+	let baseGrid = gridArr.map((coordinate, i) => initCell(i, coordinate));
 	let [isLoading, setIsLoading] = useState(false);
-	// let [currentGridState, setCurrentGridState] = useState(
-	// 	gridArr.map((coordinate, i) => {
-	// 		return initCell(i, coordinate);
-	// 	})
-	// );
-	// // let [nextAliveCoordinates, setNextAliveCoordinates] = useState([]);
-	// let [nextGridState, setNextGridState] = useState(
-	// 	gridArr.map((coordinate, i) => {
-	// 		return initCell(i, coordinate);
-	// 	})
-	// );
+	let [isClearing, setIsClearing] = useState(false);
 	let [currentGridState, setCurrentGridState] = useState([...baseGrid]);
 	let [nextGridState, setNextGridState] = useState([...baseGrid]);
 
 	function initCell(key, coordinate, isAlive=false) {
 		return {'key': key, 'coordinate': coordinate, 'isAlive': isAlive};
-		// return {'key': coordinate, 'isAlive': false};
 	}
 
 	function cellStateChange(cell, grid) {
@@ -52,24 +34,13 @@ function Grid() {
 		setCurrentGridState(cellStateChange(cell, currentGridState));
 	}
 
-	// function nextCellStateChange(cell) {
-	// 	let rtnGridCells = [...nextGridState];
-	// 	let targetCellData = {...nextGridState[cell.key]};
-	// 	targetCellData.isAlive = !targetCellData.isAlive;
-	// 	rtnGridCells[cell.id] = targetCellData;
-	// 	setNextGridState(rtnGridCells);
-	// 	// setNextGridState(cellStateChange(cell, nextGridState));
+	// function checkGridCells(checkCellCoordinate) {
+	// 	currentGridState.forEach(cell => {
+	// 		if ((cell.coordinate[0] === checkCellCoordinate[0]) && (cell.coordinate[1] === checkCellCoordinate[1])) {
+	// 			return cell;
+	// 		}
+	// 	});
 	// }
-
-	function checkGridCells(checkCellCoordinate) {
-		currentGridState.forEach(cell => {
-			// console.log(cell);
-			if ((cell.coordinate[0] === checkCellCoordinate[0]) && (cell.coordinate[1] === checkCellCoordinate[1])) {
-				return cell;
-			}
-		});
-		// setIsLoading(false);
-	}
 
 	function nextStep() {
 		let aliveCoordinates = [];
@@ -78,7 +49,6 @@ function Grid() {
 				aliveCoordinates.push(cell.coordinate);
 			}
 		});
-		console.log(aliveCoordinates);
 
 		let urlString = '';
 		aliveCoordinates.forEach(c => {
@@ -118,14 +88,25 @@ function Grid() {
 			});
 	}
 
+	function clear() {
+		setIsClearing(true);
+		setCurrentGridState([...baseGrid]);
+		setNextGridState([...baseGrid]);
+	}
+
+	useEffect(() => {
+		setIsClearing(false);
+	}, [currentGridState]);
+
 	return (
 		<div className='game-control'>
-			{currentGridState.length > 0 && <ControlCenter nextStep={nextStep}/>}
+			{currentGridState.length > 0 && <ControlCenter nextStep={nextStep} clear={clear}/>}
 			<div className='grid'>
-				{/* {console.log(currentGridState)} */}
-				{/* {console.log(currentGridState === nextGridState)} */}
-				{!isLoading && currentGridState.map((cell, i) => {
+				{!isLoading && !isClearing && currentGridState.map((cell, i) => {
 						return <Cell key={cell.key} cellId={cell.key} alive={cell.isAlive} currentCellStateChange={currentCellStateChange}/>
+					})}
+				{!isLoading && isClearing && currentGridState.map((cell, i) => {
+						return <Cell key={cell.key} cellId={cell.key} alive={false} currentCellStateChange={currentCellStateChange}/>
 					})}
 			</div>
 		</div>
